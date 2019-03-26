@@ -10,9 +10,10 @@
 </head>
 
 <body>
-<h1>Test
+<h1>Test</h1>
 
 <?php 
-'This is PHP Code';
+echo 'This is PHP Code';
+?>
 </body>
 </html>
