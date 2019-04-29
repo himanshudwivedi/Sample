@@ -2,20 +2,22 @@
 
 <project name="Phptoolstest" default="build">
 
- <target name="build" depends="prepare,lint,phpmd,phpcs,phpcpd,phpdox,phpunit" />
+ <!-- <target name="build" depends="prepare,lint,phpmd,phpcs,phpcpd,phpdox,phpunit" /> -->
+ <target name="build" depends="prepare,lint" />
+ 
 
- <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit" />
+ <!-- <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit" /> -->
 
- <target name="tools-parallel" description="Run tools in parallel">
-  <parallel threadCount="2">
-   <sequential>
-    <antcall target="phpmd" />
-   </sequential>
-   <antcall target="phpcpd" />
-   <antcall target="phpcs" />
-   <antcall target="phpdox" />
-  </parallel>
- </target>
+ <!-- <target name="tools-parallel" description="Run tools in parallel"> -->
+  <!-- <parallel threadCount="2"> -->
+   <!-- <sequential> -->
+    <!-- <antcall target="phpmd" /> -->
+   <!-- </sequential> -->
+   <!-- <antcall target="phpcpd" /> -->
+   <!-- <antcall target="phpcs" /> -->
+   <!-- <antcall target="phpdox" /> -->
+  <!-- </parallel> -->
+ <!-- </target> -->
 
  <target name="clean" description="Cleanup build artifacts">
   <delete dir="${basedir}/build/api" />
@@ -46,54 +48,54 @@
   </apply>
  </target>
 
- <target name="phpmd" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
-  <exec executable="phpmd">
-   <arg path="${basedir}/src" />
-   <arg value="text" />
-   <arg value="${basedir}/phpmd.xml" />
-  </exec>
- </target>
+ <!-- <target name="phpmd" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing."> -->
+  <!-- <exec executable="phpmd"> -->
+   <!-- <arg path="${basedir}/src" /> -->
+   <!-- <arg value="text" /> -->
+   <!-- <arg value="${basedir}/phpmd.xml" /> -->
+  <!-- </exec> -->
+ <!-- </target> -->
 
- <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
-  <exec executable="phpmd-ci">
-   <arg path="${basedir}/src" />
-   <arg value="xml" />
-   <arg value="${basedir}/phpmd.xml" />
-   <arg value="--reportfile" />
-   <arg value="${basedir}/build/logs/pmd.xml" />
-  </exec>
- </target>
+ <!-- <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server"> -->
+  <!-- <exec executable="phpmd-ci"> -->
+   <!-- <arg path="${basedir}/src" /> -->
+   <!-- <arg value="xml" /> -->
+   <!-- <arg value="${basedir}/phpmd.xml" /> -->
+   <!-- <arg value="--reportfile" /> -->
+   <!-- <arg value="${basedir}/build/logs/pmd.xml" /> -->
+  <!-- </exec> -->
+ <!-- </target> -->
 
- <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
-  <exec executable="phpcs">
-   <arg value="--standard=${basedir}/phpcs.xml" />
-   <arg path="${basedir}/src" />
-  </exec>
- </target>
+ <!-- <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing."> -->
+  <!-- <exec executable="phpcs"> -->
+   <!-- <arg value="--standard=${basedir}/phpcs.xml" /> -->
+   <!-- <arg path="${basedir}/src" /> -->
+  <!-- </exec> -->
+ <!-- </target> -->
 
- <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
-  <exec executable="phpcs" output="/dev/null">
-   <arg value="--report=checkstyle" />
-   <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-   <arg value="--standard=${basedir}/phpcs.xml" />
-   <arg path="${basedir}/src" />
-  </exec>
- </target>
+ <!-- <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server"> -->
+  <!-- <exec executable="phpcs" output="/dev/null"> -->
+   <!-- <arg value="--report=checkstyle" /> -->
+   <!-- <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" /> -->
+   <!-- <arg value="--standard=${basedir}/phpcs.xml" /> -->
+   <!-- <arg path="${basedir}/src" /> -->
+  <!-- </exec> -->
+ <!-- </target> -->
 
- <target name="phpcpd" description="Find duplicate code using PHPCPD">
-  <exec executable="phpcpd">
-   <arg value="--log-pmd" />
-   <arg value="${basedir}/build/logs/pmd-cpd.xml" />
-   <arg path="${basedir}/src" />
-  </exec>
- </target>
+ <!-- <target name="phpcpd" description="Find duplicate code using PHPCPD"> -->
+  <!-- <exec executable="phpcpd"> -->
+   <!-- <arg value="--log-pmd" /> -->
+   <!-- <arg value="${basedir}/build/logs/pmd-cpd.xml" /> -->
+   <!-- <arg path="${basedir}/src" /> -->
+  <!-- </exec> -->
+ <!-- </target> -->
 
- <target name="phpdox" description="Generate API documentation using phpDox">
-  <exec executable="phpdox" />
- </target>
+ <!-- <target name="phpdox" description="Generate API documentation using phpDox"> -->
+  <!-- <exec executable="phpdox" /> -->
+ <!-- </target> -->
 
- <target name="phpunit" description="Run unit tests with PHPUnit">
-  <exec executable="phpunit" failonerror="true" />
- </target>
+ <!-- <target name="phpunit" description="Run unit tests with PHPUnit"> -->
+  <!-- <exec executable="phpunit" failonerror="true" /> -->
+ <!-- </target> -->
 </project>
 
