@@ -2,14 +2,13 @@
 
 <project name="Phptoolstest" default="build">
 
- <target name="build" depends="prepare,lint,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit" />
+ <target name="build" depends="prepare,lint,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit" />
 
  <target name="build-parallel" depends="prepare,lint,tools-parallel,phpunit" />
 
  <target name="tools-parallel" description="Run tools in parallel">
   <parallel threadCount="2">
    <sequential>
-    <antcall target="pdepend" />
     <antcall target="phpmd-ci" />
    </sequential>
    <antcall target="phpcpd" />
@@ -22,14 +21,12 @@
   <delete dir="${basedir}/build/api" />
   <delete dir="${basedir}/build/coverage" />
   <delete dir="${basedir}/build/logs" />
-  <delete dir="${basedir}/build/pdepend" />
  </target>
 
  <target name="prepare" depends="clean" description="Prepare for build">
   <mkdir dir="${basedir}/build/api" />
   <mkdir dir="${basedir}/build/coverage" />
   <mkdir dir="${basedir}/build/logs" />
-  <mkdir dir="${basedir}/build/pdepend" />
   <mkdir dir="${basedir}/build/phpdox" />
  </target>
 
@@ -47,15 +44,6 @@
     <modified />
    </fileset>
   </apply>
- </target>
-
- <target name="pdepend" description="Calculate software metrics using PHP_Depend">
-  <exec executable="pdepend">
-   <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
-   <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
-   <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.sv" />
-   <arg value="${basedir}/src" />
-  </exec>
  </target>
 
  <target name="phpmd" description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
